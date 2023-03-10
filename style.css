@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  text-align: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+button {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  top: 5%;
+  right: 45%;
+}
+
+#canvas {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid black;
+}
+
+#black {
+  position: relative;
+  top: 5%;
+  right: 15%;
+}
+
+#red {
+  position: relative;
+  top: 5%;
+  right: 5%;
+}
+
+#blue {
+  position: relative;
+  top: 5%;
+  left: 4%;
+}
+
+#pink {
+  position: relative;
+  top: 5%;
+  left: 13%;
+}
