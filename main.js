@@ -7,6 +7,9 @@ const colorBtn = document.querySelector("#color");
 const text = document.querySelector("#text");
 const fileInput = document.querySelector("#file");
 const saveBtn = document.querySelector("#save");
+const colorOptions = Array.from(
+  document.getElementsByClassName("color_options")
+);
 
 const ctx = canvas.getContext("2d");
 
@@ -107,6 +110,13 @@ function onSave() {
   a.click();
 }
 
+function onClickColor(e) {
+  const color = e.target.dataset.color;
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  colorBtn.value = color;
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", onCancelPainting);
@@ -118,6 +128,7 @@ mode.addEventListener("click", onModeBtnClick);
 destroyBtn.addEventListener("click", onDestroy);
 eraseBtn.addEventListener("click", onErase);
 saveBtn.addEventListener("click", onSave);
+colorOptions.forEach((color) => color.addEventListener("click", onClickColor));
 
 widthRange.addEventListener("change", onWidthChange);
 colorBtn.addEventListener("change", onColorChange);
