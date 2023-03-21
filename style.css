@@ -1,17 +1,94 @@
-body {
+@import "reset.css";
+
+body{
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: blanchedalmond;
+  gap:20px;
+  padding: 20px;
+  font-family: "맑은 고딕";
 }
 
 canvas {
   width: 800px;
   height: 800px;
-  border: 3px solid black;
+  background-color: white;
+  border-radius: 10px;
 }
 
-div{
-  border:1px solid black;
+button, label#image{
+  all:unset;
+  padding: 10px 0 10px 0;
+  border:0;
+  text-align: center;
+  background-color: dodgerblue;
+  color:white;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity linear 0.1s;
+  font-weight: 600;
+}
+
+button:hover{
+  opacity: 0.8;
+}
+
+label:hover{
+  opacity: 0.8;
+}
+
+.color_options{
+  border:3px solid white;
   width:50px;
   height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform ease-in-out 0.1s;
+}
+
+.color_options:hover{
+  transform: scale(1.2);
+}
+
+.btns, .fiqure{
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+
+div#colors{
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  align-items: center;
+}
+
+input#text{
+  border:0;
+  border-radius: 5px;
+  height: 20px;
+  width: 133px;
+  transition: width .35s linear;
+}
+
+input#text:focus{
+  width: 200px;
+  outline: none;
+  border:1px solid slateblue;
+  box-shadow: 0 0 10px slateblue;
+}
+
+input#file{
+  display: none;
+}
+
+input#color{
+  border:1px solid white;
+  background-color: white;
+}
+
+label#line_text{
+  text-align: center;
 }
