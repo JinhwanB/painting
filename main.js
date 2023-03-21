@@ -23,6 +23,7 @@ canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 
 ctx.lineWidth = 5;
+ctx.lineCap = "round";
 
 function onCancelPainting() {
   isPainting = false;
