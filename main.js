@@ -3,6 +3,7 @@ const mode = document.querySelector("#mode");
 const destroyBtn = document.querySelector("#destroy");
 const widthRange = document.querySelector("#width");
 const eraseBtn = document.querySelector("#erase");
+const colorBtn = document.querySelector("#color");
 
 const ctx = canvas.getContext("2d");
 
@@ -68,6 +69,11 @@ function onErase() {
   }
 }
 
+function onColorChange(e) {
+  ctx.strokeStyle = e.target.value;
+  ctx.fillStyle = e.target.value;
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", onCancelPainting);
@@ -79,3 +85,5 @@ destroyBtn.addEventListener("click", onDestroy);
 eraseBtn.addEventListener("click", onErase);
 
 widthRange.addEventListener("change", onWidthChange);
+colorBtn.addEventListener("change", onColorChange);
+console.log(ctx.strokeStyle);
