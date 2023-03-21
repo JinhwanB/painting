@@ -5,6 +5,7 @@ const widthRange = document.querySelector("#width");
 const eraseBtn = document.querySelector("#erase");
 const colorBtn = document.querySelector("#color");
 const text = document.querySelector("#text");
+const fileInput = document.querySelector("#file");
 
 const ctx = canvas.getContext("2d");
 
@@ -86,6 +87,17 @@ function onDoubleClick(e) {
   }
 }
 
+function onFile(e) {
+  const file = e.target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    fileInput.value = null;
+  };
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", onCancelPainting);
@@ -99,3 +111,4 @@ eraseBtn.addEventListener("click", onErase);
 
 widthRange.addEventListener("change", onWidthChange);
 colorBtn.addEventListener("change", onColorChange);
+fileInput.addEventListener("change", onFile);
