@@ -4,6 +4,7 @@ const destroyBtn = document.querySelector("#destroy");
 const widthRange = document.querySelector("#width");
 const eraseBtn = document.querySelector("#erase");
 const colorBtn = document.querySelector("#color");
+const text = document.querySelector("#text");
 
 const ctx = canvas.getContext("2d");
 
@@ -74,11 +75,23 @@ function onColorChange(e) {
   ctx.fillStyle = e.target.value;
 }
 
+function onDoubleClick(e) {
+  const textValue = text.value;
+  if (textValue !== "") {
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.font = "50px 맑은 고딕";
+    ctx.fillText(textValue, e.offsetX, e.offsetY);
+    ctx.restore();
+  }
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", onCancelPainting);
 canvas.addEventListener("mouseleave", onCancelPainting);
 canvas.addEventListener("click", onFill);
+canvas.addEventListener("dblclick", onDoubleClick);
 
 mode.addEventListener("click", onModeBtnClick);
 destroyBtn.addEventListener("click", onDestroy);
@@ -86,4 +99,3 @@ eraseBtn.addEventListener("click", onErase);
 
 widthRange.addEventListener("change", onWidthChange);
 colorBtn.addEventListener("change", onColorChange);
-console.log(ctx.strokeStyle);
