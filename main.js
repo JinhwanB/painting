@@ -10,6 +10,7 @@ const saveBtn = document.querySelector("#save");
 const colorOptions = Array.from(
   document.getElementsByClassName("color_options")
 );
+const lineText = document.querySelector("#line_text");
 
 const ctx = canvas.getContext("2d");
 
@@ -66,6 +67,7 @@ function onDestroy() {
 
 function onWidthChange(e) {
   ctx.lineWidth = e.target.value;
+  lineText.innerText = `선 굵기 : ${e.target.value}`;
 }
 
 function onErase() {
