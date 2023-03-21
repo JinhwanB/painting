@@ -2,6 +2,7 @@ const canvas = document.querySelector("#canvas");
 const mode = document.querySelector("#mode");
 const destroyBtn = document.querySelector("#destroy");
 const widthRange = document.querySelector("#width");
+const eraseBtn = document.querySelector("#erase");
 
 const ctx = canvas.getContext("2d");
 
@@ -23,7 +24,6 @@ function onCancelPainting() {
 
 function onFill() {
   if (isFilling) {
-    ctx.fillStyle = "black";
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }
 }
@@ -60,6 +60,14 @@ function onWidthChange(e) {
   ctx.lineWidth = e.target.value;
 }
 
+function onErase() {
+  ctx.strokeStyle = "white";
+  if (isFilling === true) {
+    isFilling = false;
+    mode.innerText = "Fill";
+  }
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", onCancelPainting);
@@ -68,5 +76,6 @@ canvas.addEventListener("click", onFill);
 
 mode.addEventListener("click", onModeBtnClick);
 destroyBtn.addEventListener("click", onDestroy);
+eraseBtn.addEventListener("click", onErase);
 
 widthRange.addEventListener("change", onWidthChange);
