@@ -1,19 +1,20 @@
 const canvas = document.querySelector("#canvas");
 const mode = document.querySelector("#mode");
 const destroyBtn = document.querySelector("#destroy");
+const widthRange = document.querySelector("#width");
 
 const ctx = canvas.getContext("2d");
 
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
 
-canvas.width = CANVAS_WIDTH;
-canvas.height = CANVAS_HEIGHT;
-
 let isPainting = false;
 let isFilling = false;
 
-// 페인트 붓 굵기를 유저가 원하는 값으로 변경 가능한 코드 작성
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
+
+ctx.lineWidth = 5;
 
 function onCancelPainting() {
   isPainting = false;
@@ -55,6 +56,10 @@ function onDestroy() {
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
+function onWidthChange(e) {
+  ctx.lineWidth = e.target.value;
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", onCancelPainting);
@@ -63,3 +68,5 @@ canvas.addEventListener("click", onFill);
 
 mode.addEventListener("click", onModeBtnClick);
 destroyBtn.addEventListener("click", onDestroy);
+
+widthRange.addEventListener("change", onWidthChange);
