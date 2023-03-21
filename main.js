@@ -6,6 +6,7 @@ const eraseBtn = document.querySelector("#erase");
 const colorBtn = document.querySelector("#color");
 const text = document.querySelector("#text");
 const fileInput = document.querySelector("#file");
+const saveBtn = document.querySelector("#save");
 
 const ctx = canvas.getContext("2d");
 
@@ -98,6 +99,14 @@ function onFile(e) {
   };
 }
 
+function onSave() {
+  const url = canvas.toDataURL();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "myPng.png";
+  a.click();
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", onCancelPainting);
@@ -108,6 +117,7 @@ canvas.addEventListener("dblclick", onDoubleClick);
 mode.addEventListener("click", onModeBtnClick);
 destroyBtn.addEventListener("click", onDestroy);
 eraseBtn.addEventListener("click", onErase);
+saveBtn.addEventListener("click", onSave);
 
 widthRange.addEventListener("change", onWidthChange);
 colorBtn.addEventListener("change", onColorChange);
