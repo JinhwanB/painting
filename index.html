@@ -11,7 +11,7 @@
 
 <body>
     <div id="colors">
-        <input type="color" id="color"/>
+        <input type="color" id="color" />
         <div class="color_options" style="background-color:#F44336;" data-color="#F44336"></div>
         <div class="color_options" style="background-color:#9C27B0;" data-color="#9C27B0"></div>
         <div class="color_options" style="background-color:#3F51B5;" data-color="#3F51B5"></div>
@@ -22,22 +22,21 @@
     </div>
     <canvas id="canvas"></canvas>
     <div class="btns">
-        <label for="width" id="line_text">선 굵기 : 5</label>
-        <input type="range" id="width" min="1" max="10" step="0.5" value="5" />
-        <button id="stroke">stroke</button>
+        <input type="range" id="width" min="1" max="10" step="1" value="5" />
+        <label for="width" id="line_text">5</label>
+        <button id="stroke">Stroke</button>
         <button id="fill">Fill</button>
-        <button id="destroy">Destroy</button>
+        <button id="destroy">Reset</button>
         <button id="erase">Erase</button>
-        <input type="text" id="text" placeholder="Write and double click in canvas"/>
+        <input type="text" id="text" placeholder="Write and double click in canvas" />
         <label for="file" id="image">이미지 추가</label>
-            <input type="file" id="file"/>
+        <input type="file" id="file" />
         <button id="save">Save Image</button>
     </div>
     <div id="figure">
         <button id="square">⬜</button>
     </div>
     <script src="main.js"></script>
-    <script src="drag.js"></script>
 </body>
 
 </html>
