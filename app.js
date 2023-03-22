@@ -13,6 +13,7 @@ const colorOptions = Array.from(
 const lineText = document.querySelector("#line_text");
 const strokeBtn = document.querySelector("#stroke");
 const squareBtn = document.querySelector("#square");
+const circleBtn = document.querySelector("#circle");
 
 const ctx = canvas.getContext("2d");
 
@@ -46,8 +47,12 @@ function onMove(e) {
       const width = x - currentX;
       const height = y - currentY;
       ctx.moveTo(x, y);
-      ctx.clearRect(currentX, currentY, width, height);
-      ctx.strokeRect(currentX, currentY, width, height);
+      ctx.fillRect(currentX, currentY, width, height);
+    } else if (mode === 5) {
+      const circleX = e.offsetX;
+      const circleWidth = circleX - currentX;
+      ctx.arc(currentX, currentY, circleWidth, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
   ctx.moveTo(e.offsetX, e.offsetY);
@@ -55,7 +60,7 @@ function onMove(e) {
 
 function startPainting(e) {
   isPainting = true;
-  if (mode === 4) {
+  if (mode === 4 || mode === 5) {
     currentX = e.offsetX;
     currentY = e.offsetY;
   }
@@ -93,6 +98,10 @@ function resetClick() {
 
 function squareClick() {
   mode = 4;
+}
+
+function circleClick() {
+  mode = 5;
 }
 
 function colorClick(e) {
@@ -157,6 +166,7 @@ saveBtn.addEventListener("click", onSave);
 strokeBtn.addEventListener("click", strokeClick);
 colorOptions.forEach((color) => color.addEventListener("click", colorClick));
 squareBtn.addEventListener("click", squareClick);
+circleBtn.addEventListener("click", circleClick);
 
 widthRange.addEventListener("change", onWidthChange);
 colorBtn.addEventListener("change", onColorChange);
