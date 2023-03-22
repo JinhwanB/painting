@@ -1,11 +1,11 @@
 @import "reset.css";
 
-body{
+body {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: blanchedalmond;
-  gap:20px;
+  gap: 20px;
   padding: 20px;
   font-family: "맑은 고딕";
 }
@@ -17,13 +17,15 @@ canvas {
   border-radius: 10px;
 }
 
-button, label#image{
-  all:unset;
+button,
+label#image {
+  all: unset;
   padding: 10px 0 10px 0;
-  border:0;
+  border: 0;
   text-align: center;
   background-color: dodgerblue;
-  color:white;
+  color: white;
+  width: 137px;
   height: 20px;
   border-radius: 10px;
   cursor: pointer;
@@ -31,64 +33,122 @@ button, label#image{
   font-weight: 600;
 }
 
-button:hover{
+button:hover {
   opacity: 0.8;
 }
 
-label:hover{
+label:hover {
   opacity: 0.8;
 }
 
-.color_options{
-  border:3px solid white;
-  width:50px;
+.color_options {
+  border: 3px solid white;
+  width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
   transition: transform ease-in-out 0.1s;
 }
 
-.color_options:hover{
+.color_options:hover {
   transform: scale(1.2);
 }
 
-.btns, .fiqure{
-  display: flex;
-  flex-direction: column;
-  gap:20px;
+.container1 span {
+  text-align: center;
+  font-weight: 900;
+  font-size: xx-large;
 }
 
-div#colors{
+div.container1 {
   display: flex;
   flex-direction: column;
-  gap:20px;
-  align-items: center;
+  gap: 10px;
 }
 
-input#text{
-  border:0;
+div.btns {
+  display: float;
+  float: left;
+  width: 500px;
+  height: 200px;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+div.btns button {
+  display: inlilne;
+  margin: 10px;
+}
+
+div#range {
+  display: block;
+  text-align: center;
+  margin: 30px 0 15px 0;
+}
+
+input#width {
+  display: inline-block;
+  margin-right: 60px;
+  width: 300px;
+  accent-color: lightblue;
+}
+
+input#width:focus {
+  cursor: pointer;
+}
+
+input#width::-webkit-slider-runnable-track {
+  height: 8px;
+  margin-bottom: 7px;
+  border-radius: 40px;
+}
+
+div#range label {
+  display: inline;
+  font-weight: 900;
+}
+
+div#colors {
+  display: float;
+  float: left;
+  gap: 20px;
+  border: 1px solid black;
+}
+
+#colors #color,
+#colors .color_options {
+  display: inline-block;
+}
+
+input#text {
+  border: 0;
   border-radius: 5px;
   height: 20px;
   width: 133px;
-  transition: width .35s linear;
+  transition: width 0.35s linear;
 }
 
-input#text:focus{
+input#text:focus {
   width: 200px;
   outline: none;
-  border:1px solid slateblue;
+  border: 1px solid slateblue;
   box-shadow: 0 0 10px slateblue;
 }
 
-input#file{
+input#file {
   display: none;
 }
 
-input#color{
-  border:1px solid white;
+input#color {
+  border: 1px solid white;
   background-color: white;
 }
 
-label#line_text{
+label#line_text {
   text-align: center;
+}
+
+div#insert {
+  display: flex;
+  flex-direction: column;
 }

@@ -10,32 +10,39 @@
 </head>
 
 <body>
-    <div id="colors">
-        <input type="color" id="color" />
-        <div class="color_options" style="background-color:#F44336;" data-color="#F44336"></div>
-        <div class="color_options" style="background-color:#9C27B0;" data-color="#9C27B0"></div>
-        <div class="color_options" style="background-color:#3F51B5;" data-color="#3F51B5"></div>
-        <div class="color_options" style="background-color:#009688;" data-color="#009688"></div>
-        <div class="color_options" style="background-color:#CDDC39;" data-color="#CDDC39"></div>
-        <div class="color_options" style="background-color:#FFC107;" data-color="#FFC107"></div>
-        <div class="color_options" style="background-color:#795548;" data-color="#795548"></div>
+    <div class="container1">
+        <span>Mode</span>
+        <div class="btns">
+            <div id="range">
+                <input type="range" id="width" min="1" max="10" value="5" />
+                <label for="width" id="line_text">5</label>
+            </div>
+            <button id="stroke">Stroke</button>
+            <button id="fill">Fill</button>
+            <button id="square">Square</button>
+            <button id="circle">Circle</button>
+            <button id="destroy">Reset</button>
+            <button id="erase">Erase</button>
+        </div>
+        <span>Colors</span>
+        <div id="colors">
+            <input type="color" id="color" />
+            <div class="color_options" style="background-color:#F44336;" data-color="#F44336"></div>
+            <div class="color_options" style="background-color:#9C27B0;" data-color="#9C27B0"></div>
+            <div class="color_options" style="background-color:#3F51B5;" data-color="#3F51B5"></div>
+            <div class="color_options" style="background-color:#009688;" data-color="#009688"></div>
+            <div class="clear"></div>
+            <div class="color_options" style="background-color:#CDDC39;" data-color="#CDDC39"></div>
+            <div class="color_options" style="background-color:#FFC107;" data-color="#FFC107"></div>
+            <div class="color_options" style="background-color:#795548;" data-color="#795548"></div>
+        </div>
     </div>
     <canvas id="canvas"></canvas>
-    <div class="btns">
-        <input type="range" id="width" min="1" max="10" step="1" value="5" />
-        <label for="width" id="line_text">5</label>
-        <button id="stroke">Stroke</button>
-        <button id="fill">Fill</button>
-        <button id="destroy">Reset</button>
-        <button id="erase">Erase</button>
+    <div id="insert">
         <input type="text" id="text" placeholder="Write and double click in canvas" />
         <label for="file" id="image">이미지 추가</label>
         <input type="file" id="file" />
         <button id="save">Save Image</button>
-    </div>
-    <div id="figure">
-        <button id="square">⬜</button>
-        <button id="circle">⚪</button>
     </div>
     <script src="app.js"></script>
 </body>
