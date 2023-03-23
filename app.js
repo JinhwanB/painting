@@ -14,10 +14,12 @@ const lineText = document.querySelector("#line_text");
 const strokeBtn = document.querySelector("#stroke");
 const squareBtn = document.querySelector("#square");
 const circleBtn = document.querySelector("#circle");
+const editBtn = document.querySelector("#edit");
 
 const ctx = canvas.getContext("2d");
 
 const CANVAS_SIZE = 800;
+const INVISIBLE_KEY = "invisible";
 
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
@@ -25,10 +27,7 @@ canvas.height = CANVAS_SIZE;
 let isPainting = false;
 
 let mode = 0;
-// 0: stroke
-// 1: fill
-// 2: erase
-// 3: destroy
+
 let currentX = 0;
 let currentY = 0;
 
@@ -54,8 +53,8 @@ function onMove(e) {
       ctx.arc(currentX, currentY, circleWidth, 0, Math.PI * 2);
       ctx.fill();
     }
+    ctx.moveTo(e.offsetX, e.offsetY);
   }
-  ctx.moveTo(e.offsetX, e.offsetY);
 }
 
 function startPainting(e) {
@@ -104,6 +103,10 @@ function circleClick() {
   mode = 5;
 }
 
+function editMode() {
+  text.classList.remove(INVISIBLE_KEY);
+}
+
 function colorClick(e) {
   if (mode !== 2) {
     const color = e.target.dataset.color;
@@ -130,7 +133,8 @@ function doubleClick(e) {
     ctx.lineWidth = 1;
     ctx.font = "50px 맑은 고딕";
     ctx.fillText(textValue, e.offsetX, e.offsetY);
-    ctx.restore();
+    text.value = "";
+    text.classList.add(INVISIBLE_KEY);
   }
 }
 
@@ -152,6 +156,13 @@ function onSave() {
   a.click();
 }
 
+function cancelText(e) {
+  const keyCode = e.keyCode;
+  if (keyCode == 27) {
+    text.classList.add(INVISIBLE_KEY);
+  }
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -167,7 +178,10 @@ strokeBtn.addEventListener("click", strokeClick);
 colorOptions.forEach((color) => color.addEventListener("click", colorClick));
 squareBtn.addEventListener("click", squareClick);
 circleBtn.addEventListener("click", circleClick);
+editBtn.addEventListener("click", editMode);
 
 widthRange.addEventListener("change", onWidthChange);
 colorBtn.addEventListener("change", onColorChange);
 fileInput.addEventListener("change", uploadFile);
+
+document.addEventListener("keydown", cancelText);

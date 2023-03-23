@@ -2,19 +2,13 @@
 
 body {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   background-color: blanchedalmond;
   gap: 20px;
   padding: 20px;
   font-family: "맑은 고딕";
-}
-
-canvas {
-  width: 800px;
-  height: 800px;
-  background-color: white;
-  border-radius: 10px;
+  user-select: none;
 }
 
 button,
@@ -37,14 +31,25 @@ button:hover {
   opacity: 0.8;
 }
 
-label:hover {
+span {
+  text-align: center;
+  font-weight: 900;
+  font-size: xx-large;
+}
+
+#image:hover {
   opacity: 0.8;
+}
+
+.invisible {
+  display: none;
 }
 
 .color_options {
   border: 3px solid white;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
+  margin: 10px 15px 15px 0;
   border-radius: 50%;
   cursor: pointer;
   transition: transform ease-in-out 0.1s;
@@ -54,16 +59,26 @@ label:hover {
   transform: scale(1.2);
 }
 
-.container1 span {
-  text-align: center;
-  font-weight: 900;
+.btns,
+#colors,
+#insert {
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #f48fb1;
+  background-color: #fce4ec;
+}
+
+.texts {
+  position: absolute;
+  bottom: 500px;
   font-size: xx-large;
+  font-weight: 500;
 }
 
 div.container1 {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 50px;
 }
 
 div.btns {
@@ -72,7 +87,6 @@ div.btns {
   width: 500px;
   height: 200px;
   padding: 20px;
-  border: 1px solid black;
 }
 
 div.btns button {
@@ -91,6 +105,7 @@ input#width {
   margin-right: 60px;
   width: 300px;
   accent-color: lightblue;
+  cursor: pointer;
 }
 
 input#width:focus {
@@ -109,10 +124,25 @@ div#range label {
 }
 
 div#colors {
-  display: float;
-  float: left;
-  gap: 20px;
-  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 200px;
+}
+
+#canvas {
+  width: 800px;
+  height: 800px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#canvas2 {
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 #colors #color,
@@ -120,19 +150,50 @@ div#colors {
   display: inline-block;
 }
 
-input#text {
-  border: 0;
-  border-radius: 5px;
-  height: 20px;
-  width: 133px;
-  transition: width 0.35s linear;
+#color {
+  display: inline-block;
+  cursor: pointer;
 }
 
-input#text:focus {
-  width: 200px;
+#choose_color {
+  display: inline;
+  width: 50;
+}
+
+#color_op {
+  display: inline-block;
+}
+
+#container3 {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 542px;
+}
+
+#text {
+  border: 2px solid #90caf9;
+  border-radius: 5px;
+  width: 100px;
+  transition: transform 0.5s linear, width 0.5s linear;
+}
+
+#text:focus {
+  transform: scale(1.2);
+  width: 300px;
   outline: none;
-  border: 1px solid slateblue;
-  box-shadow: 0 0 10px slateblue;
+  border: 2px solid #1976d2;
+}
+
+#destroy {
+  background-color: #ef5350;
+}
+
+#edit_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 input#file {
