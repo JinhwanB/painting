@@ -37,12 +37,13 @@ span {
   font-size: xx-large;
 }
 
-#image:hover {
-  opacity: 0.8;
+label {
+  font-weight: 900;
+  color: #9575cd;
 }
 
-.invisible {
-  display: none;
+#image:hover {
+  opacity: 0.8;
 }
 
 .color_options {
@@ -68,11 +69,26 @@ span {
   background-color: #fce4ec;
 }
 
-.texts {
-  position: absolute;
-  bottom: 500px;
-  font-size: xx-large;
-  font-weight: 500;
+.text_size {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.text_input {
+  display: flex;
+  justify-content: center;
+}
+
+.text_mode {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.preview_box {
+  display: flex;
+  justify-content: center;
 }
 
 div.container1 {
@@ -100,7 +116,7 @@ div#range {
   margin: 30px 0 15px 0;
 }
 
-input#width {
+input[type="range"] {
   display: inline-block;
   margin-right: 60px;
   width: 300px;
@@ -108,11 +124,11 @@ input#width {
   cursor: pointer;
 }
 
-input#width:focus {
+input[type="range"]:focus {
   cursor: pointer;
 }
 
-input#width::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   height: 8px;
   margin-bottom: 7px;
   border-radius: 40px;
@@ -120,7 +136,6 @@ input#width::-webkit-slider-runnable-track {
 
 div#range label {
   display: inline;
-  font-weight: 900;
 }
 
 div#colors {
@@ -134,13 +149,6 @@ div#colors {
 #canvas {
   width: 800px;
   height: 800px;
-  background-color: white;
-  border-radius: 10px;
-}
-
-#canvas2 {
-  width: 300px;
-  height: 300px;
   background-color: white;
   border-radius: 10px;
 }
@@ -164,7 +172,7 @@ div#colors {
   display: inline-block;
 }
 
-#container3 {
+#container2 {
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -192,8 +200,17 @@ div#colors {
 #edit_text {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-evenly;
+  gap: 20px;
+  border: 1px solid #f48fb1;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fce4ec;
+}
+
+#preview {
+  width: 200px;
+  height: 200px;
 }
 
 input#file {
