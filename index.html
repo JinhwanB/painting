@@ -42,7 +42,10 @@
             </div>
         </div>
     </div>
-    <canvas id="canvas"></canvas>
+    <div id="canvas_container">
+        <canvas id="canvas"></canvas>
+        <button id="save">Save Image</button>
+    </div>
     <div id="container2">
         <span>Edit Text</span>
         <div id="edit_text">
@@ -343,17 +346,19 @@
                 <button id="fill_text">Fill Text</button>
             </div>
             <div class="text_input">
-                <input type="text" id="text" placeholder="Write Here.." required />
+                <input type="text" id="text" placeholder="Write Here.." autocomplete="off" required />
             </div>
         </div>
         <span>Insert Image</span>
-        <div class="preview_box">
-            <image id="preview"></image>
-        </div>
         <div id="insert">
-            <label for="file" id="image">이미지 추가</label>
-            <input type="file" id="file" />
-            <button id="save">Save Image</button>
+            <div class="preview_box">
+                <image id="preview" src="img/cat.jpg"></image>
+            </div>
+            <div id="change_img">
+                <input type="file" id="file" />
+                <label for="file" id="image">이미지 선택</label>
+                <button id="image_input">결정</button>
+            </div>
         </div>
     </div>
     <script src="app.js"></script>

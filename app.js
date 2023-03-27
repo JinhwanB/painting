@@ -20,6 +20,7 @@ const select = document.querySelector("select");
 const strokeTextBtn = document.querySelector("#stroke_text");
 const fillTextBtn = document.querySelector("#fill_text");
 const previewImg = document.querySelector("#preview");
+const imageInput = document.querySelector("#image_input");
 
 const ctx = canvas.getContext("2d");
 
@@ -142,11 +143,13 @@ function doubleClick(e) {
     ctx.lineWidth = 1;
     ctx.font = `${textSize}px 맑은 고딕`;
     ctx.strokeText(textValue, e.offsetX, e.offsetY);
+    ctx.restore();
   } else if (textValue !== "" && mode === 7) {
     ctx.save();
     ctx.lineWidth = 1;
     ctx.font = `${textSize}px 맑은 고딕`;
     ctx.fillText(textValue, e.offsetX, e.offsetY);
+    ctx.restore();
   }
 }
 
@@ -163,27 +166,22 @@ function selected(e) {
 function previewFile(e) {
   const file = e.target.files[0];
   const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
   previewImg.src = url;
+  imageInput.onclick = function () {
+    previewImg.src = "img/cat.jpg";
+    ctx.drawImage(image, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  };
 }
-// const image = new Image();
-// image.src = url;
-// image.onload = function () {
-//   ctx.drawImage(image, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
-// };
 
 function onSave() {
   const url = canvas.toDataURL();
   const a = document.createElement("a");
   a.href = url;
   a.download = "myPng.png";
+  a.target = "_blank";
   a.click();
-}
-
-function cancelText(e) {
-  const keyCode = e.keyCode;
-  if (keyCode == 27) {
-    text.classList.add(INVISIBLE_KEY);
-  }
 }
 
 canvas.addEventListener("mousemove", onMove);
@@ -204,21 +202,12 @@ circleBtn.addEventListener("click", circleClick);
 strokeTextBtn.addEventListener("click", strokeTextBtnClick);
 fillTextBtn.addEventListener("click", fillTextBtnClick);
 
-widthRange.addEventListener("change", onWidthChange);
+widthRange.addEventListener("input", onWidthChange);
+textWidth.addEventListener("input", textWidthChange);
+
 colorBtn.addEventListener("change", onColorChange);
 fileInput.addEventListener("change", previewFile);
-textWidth.addEventListener("change", textWidthChange);
 select.addEventListener("change", selected);
-
-document.addEventListener("keydown", cancelText);
-
-previewImg.addEventListener("dragover", (e) => {
-  e.preventDefault();
-});
-previewImg.addEventListener("drop", (e) => {
-  e.preventDefault();
-  console.log(e.target.file[0]);
-});
 
 text.addEventListener("focusin", () => {
   text.setAttribute("placeholder", "Write and doubleclick in canvas");
