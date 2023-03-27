@@ -21,6 +21,7 @@ const strokeTextBtn = document.querySelector("#stroke_text");
 const fillTextBtn = document.querySelector("#fill_text");
 const previewImg = document.querySelector("#preview");
 const imageInput = document.querySelector("#image_input");
+const body = document.querySelector("body");
 
 const ctx = canvas.getContext("2d");
 
@@ -83,15 +84,27 @@ function onFill() {
 
 function strokeClick() {
   mode = 0;
+  canvas.classList.add("pen");
+  canvas.classList.remove("circle_shape");
+  canvas.classList.remove("square_shape");
+  canvas.classList.remove("eraser_shape");
 }
 
 function fillClick() {
   mode = 1;
+  canvas.classList.add("pen");
+  canvas.classList.remove("circle_shape");
+  canvas.classList.remove("square_shape");
+  canvas.classList.remove("eraser_shape");
 }
 
 function eraseClick() {
   mode = 2;
   ctx.strokeStyle = "white";
+  canvas.classList.remove("pen");
+  canvas.classList.remove("circle_shape");
+  canvas.classList.add("eraser_shape");
+  canvas.classList.remove("square_shape");
 }
 
 function resetClick() {
@@ -102,10 +115,18 @@ function resetClick() {
 
 function squareClick() {
   mode = 4;
+  canvas.classList.remove("pen");
+  canvas.classList.remove("circle_shape");
+  canvas.classList.remove("eraser_shape");
+  canvas.classList.add("square_shape");
 }
 
 function circleClick() {
   mode = 5;
+  canvas.classList.remove("pen");
+  canvas.classList.remove("square_shape");
+  canvas.classList.remove("eraser_shape");
+  canvas.classList.add("circle_shape");
 }
 
 function strokeTextBtnClick() {
