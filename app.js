@@ -21,26 +21,42 @@ const strokeTextBtn = document.querySelector("#stroke_text");
 const fillTextBtn = document.querySelector("#fill_text");
 const previewImg = document.querySelector("#preview");
 const imageInput = document.querySelector("#image_input");
+const alertWindow = document.querySelector("#alert");
+const alertConfirm = document.querySelector("#confirm");
+const alertCancel = document.querySelector("#cancel");
 const body = document.querySelector("body");
 
 const ctx = canvas.getContext("2d");
 
 const CANVAS_SIZE = 800;
 
-canvas.width = CANVAS_SIZE;
+const INVISIBLE_KEY = "invisible";
+const POINTER_EVENT_NONE_KEY = "pointer_event_none";
+
+canvas.width = CANVAS_SIZE; // 캔버스 크기 설정
 canvas.height = CANVAS_SIZE;
 
-let isPainting = false;
+let isPainting = false; // 캔버스에 mousedown 이벤트 확인
 
-let mode = 0;
+let mode = 0; // 도형 그리기, 펜 그리기 등 구분을 위한 변수 설정
 
-let currentX = 0;
+let currentX = 0; // 현재 마우스 위치
 let currentY = 0;
 
-ctx.lineWidth = 5;
-ctx.lineCap = "round";
+ctx.lineWidth = 5; // 펜의 기본 굵기 설정
+ctx.lineCap = "round"; // 펜의 선 긋기 끝나는 지점 둥글게
 
-function onMove(e) {
+// 마우스 눌림 감지
+function startPainting(e) {
+  isPainting = true;
+  if (mode === 4 || mode === 5) {
+    currentX = e.offsetX;
+    currentY = e.offsetY;
+  }
+}
+
+// 마우스를 움직이며 그리기
+function mouseMove(e) {
   if (isPainting) {
     if (mode === 0 || mode === 2) {
       ctx.lineTo(e.offsetX, e.offsetY);
@@ -63,41 +79,46 @@ function onMove(e) {
   }
 }
 
-function startPainting(e) {
-  isPainting = true;
-  if (mode === 4 || mode === 5) {
-    currentX = e.offsetX;
-    currentY = e.offsetY;
-  }
-}
-
+// 마우스 버튼 땠을 때 감지
 function cancelPainting() {
   isPainting = false;
   ctx.beginPath();
 }
 
-function onFill() {
+// 캔버스 채우기
+function fillMode() {
   if (mode === 1) {
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   }
 }
 
+// 기본 선 그리기 모드로 변경
 function strokeClick() {
   mode = 0;
   canvas.classList.add("pen");
   canvas.classList.remove("circle_shape");
   canvas.classList.remove("square_shape");
   canvas.classList.remove("eraser_shape");
+  canvas.classList.remove("fill_shape");
 }
 
+// 펜 굵기 변화 감지
+function penWidthChange(e) {
+  ctx.lineWidth = e.target.value;
+  lineText.innerText = `${e.target.value}`;
+}
+
+// 캔버스 채우기 모드
 function fillClick() {
   mode = 1;
-  canvas.classList.add("pen");
+  canvas.classList.add("fill_shape");
+  canvas.classList.remove("pen");
   canvas.classList.remove("circle_shape");
   canvas.classList.remove("square_shape");
   canvas.classList.remove("eraser_shape");
 }
 
+// 지우개 모드
 function eraseClick() {
   mode = 2;
   ctx.strokeStyle = "white";
@@ -105,30 +126,52 @@ function eraseClick() {
   canvas.classList.remove("circle_shape");
   canvas.classList.add("eraser_shape");
   canvas.classList.remove("square_shape");
+  canvas.classList.remove("fill_shape");
 }
 
+// 캔버스 내용 초기화
 function resetClick() {
-  mode = 3;
+  alertWindow.classList.add("pointer_event_auto");
+  alertWindow.classList.remove(INVISIBLE_KEY);
+  body.classList.add(POINTER_EVENT_NONE_KEY);
+}
+
+function resetConfirm() {
+  alertWindow.classList.add(INVISIBLE_KEY);
+  body.classList.remove(POINTER_EVENT_NONE_KEY);
+  ctx.save();
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  ctx.restore();
 }
 
+function resetCancel() {
+  alertWindow.classList.add(INVISIBLE_KEY);
+  body.classList.remove(POINTER_EVENT_NONE_KEY);
+}
+// 캔버스 내용 초기화 끝
+
+// 사각형 그리기 모드
 function squareClick() {
   mode = 4;
   canvas.classList.remove("pen");
   canvas.classList.remove("circle_shape");
   canvas.classList.remove("eraser_shape");
+  canvas.classList.remove("fill_shape");
   canvas.classList.add("square_shape");
 }
 
+// 원 그리기 모드
 function circleClick() {
   mode = 5;
   canvas.classList.remove("pen");
   canvas.classList.remove("square_shape");
   canvas.classList.remove("eraser_shape");
+  canvas.classList.remove("fill_shape");
   canvas.classList.add("circle_shape");
 }
 
+// 캔버스에 텍스트 넣기
 function strokeTextBtnClick() {
   mode = 6;
 }
@@ -137,23 +180,14 @@ function fillTextBtnClick() {
   mode = 7;
 }
 
-function colorClick(e) {
-  if (mode !== 2) {
-    const color = e.target.dataset.color;
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
-    colorBtn.value = color;
-  }
+function textWidthChange(e) {
+  const sizeOfText = e.target.value;
+  select.value = sizeOfText;
 }
 
-function onWidthChange(e) {
-  ctx.lineWidth = e.target.value;
-  lineText.innerText = `${e.target.value}`;
-}
-
-function onColorChange(e) {
-  ctx.strokeStyle = e.target.value;
-  ctx.fillStyle = e.target.value;
+function textWidthSelect(e) {
+  const sizeOfText = e.target.value;
+  textWidth.value = sizeOfText;
 }
 
 function doubleClick(e) {
@@ -173,18 +207,26 @@ function doubleClick(e) {
     ctx.restore();
   }
 }
+// 캔버스에 텍스트 넣기 끝
 
-function textWidthChange(e) {
-  const sizeOfText = e.target.value;
-  select.value = sizeOfText;
+// 컬러 바꾸기 기능
+function colorClick(e) {
+  if (mode !== 2) {
+    const color = e.target.dataset.color;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    colorBtn.value = color;
+  }
 }
 
-function selected(e) {
-  const sizeOfText = e.target.value;
-  textWidth.value = sizeOfText;
+function colorChange(e) {
+  ctx.strokeStyle = e.target.value;
+  ctx.fillStyle = e.target.value;
 }
+//컬러 바꾸기 기능 끝
 
-function previewFile(e) {
+// 불러온 이미지 미리보기 기능
+function previewImage(e) {
   const file = e.target.files[0];
   const url = URL.createObjectURL(file);
   const image = new Image();
@@ -196,39 +238,42 @@ function previewFile(e) {
   };
 }
 
-function onSave() {
+// 작업한 캔버스 내용 컴퓨터에 저장 기능
+function saveImg() {
   const url = canvas.toDataURL();
   const a = document.createElement("a");
   a.href = url;
-  a.download = "myPng.png";
+  a.download = "myImg.png";
   a.target = "_blank";
   a.click();
 }
 
-canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousemove", mouseMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
-canvas.addEventListener("click", onFill);
 canvas.addEventListener("dblclick", doubleClick);
+canvas.addEventListener("click", fillMode);
 
-fillBtn.addEventListener("click", fillClick);
-destroyBtn.addEventListener("click", resetClick);
-eraseBtn.addEventListener("click", eraseClick);
-saveBtn.addEventListener("click", onSave);
 strokeBtn.addEventListener("click", strokeClick);
-colorOptions.forEach((color) => color.addEventListener("click", colorClick));
+fillBtn.addEventListener("click", fillClick);
 squareBtn.addEventListener("click", squareClick);
 circleBtn.addEventListener("click", circleClick);
+eraseBtn.addEventListener("click", eraseClick);
+destroyBtn.addEventListener("click", resetClick);
 strokeTextBtn.addEventListener("click", strokeTextBtnClick);
 fillTextBtn.addEventListener("click", fillTextBtnClick);
+saveBtn.addEventListener("click", saveImg);
+alertConfirm.addEventListener("click", resetConfirm);
+alertCancel.addEventListener("click", resetCancel);
+colorOptions.forEach((color) => color.addEventListener("click", colorClick));
 
-widthRange.addEventListener("input", onWidthChange);
+widthRange.addEventListener("input", penWidthChange);
 textWidth.addEventListener("input", textWidthChange);
 
-colorBtn.addEventListener("change", onColorChange);
-fileInput.addEventListener("change", previewFile);
-select.addEventListener("change", selected);
+colorBtn.addEventListener("change", colorChange);
+fileInput.addEventListener("change", previewImage);
+select.addEventListener("change", textWidthSelect);
 
 text.addEventListener("focusin", () => {
   text.setAttribute("placeholder", "Write and doubleclick in canvas");

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/paint-palette.png">
     <title>그림판</title>
 </head>
 
@@ -41,6 +42,12 @@
                 <div class="color_options" style="background-color:#FFC2C4;" data-color="#FFC2C4"></div>
             </div>
         </div>
+    </div>
+    <div id="alert" class="invisible">
+        <div>⚠️</div>
+        <h4>캔버스의 모든 내용을 초기화 하시겠습니까?</h4>
+        <button id="confirm">확인</button>
+        <button id="cancel">취소</button>
     </div>
     <div id="canvas_container">
         <canvas id="canvas" class="pen"></canvas>

@@ -12,6 +12,10 @@ body {
   cursor: url(https://cur.cursors-4u.net/symbols/sym-6/sym598.cur), auto !important;
 }
 
+.pointer_event_none {
+  pointer-events: none;
+}
+
 button,
 label#image {
   all: unset;
@@ -107,6 +111,16 @@ label {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>⬜</text></svg>")
       16 0,
     auto;
+}
+
+.fill_shape {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🖌️</text></svg>")
+      16 0,
+    auto;
+}
+
+.invisible {
+  display: none;
 }
 
 div.container1 {
@@ -255,6 +269,39 @@ div#colors {
   flex-direction: column;
   gap: 20px;
   align-items: center;
+}
+
+.pointer_event_auto {
+  pointer-events: auto;
+}
+
+#alert {
+  border-radius: 10px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px 50px 50px;
+  background-color: #ecf9ff;
+  -moz-box-shadow: 3px 3px 3px 3px #999;
+  -webkit-box-shadow: 3px 3px 3px 3px #999;
+  box-shadow: 3px 3px 3px 3px #999;
+}
+
+#alert h4 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#alert div {
+  text-align: center;
+  font-size: xx-large;
+  margin-bottom: 30px;
+}
+
+#alert button {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 input#color {
