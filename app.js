@@ -31,7 +31,7 @@ const ctx = canvas.getContext("2d");
 const CANVAS_SIZE = 800;
 
 const INVISIBLE_KEY = "invisible";
-const POINTER_EVENT_NONE_KEY = "pointer_event_none";
+const POINTER_EVENT_NONE_CLASS = "pointer_event_none";
 
 canvas.width = CANVAS_SIZE; // 캔버스 크기 설정
 canvas.height = CANVAS_SIZE;
@@ -133,12 +133,12 @@ function eraseClick() {
 function resetClick() {
   alertWindow.classList.add("pointer_event_auto");
   alertWindow.classList.remove(INVISIBLE_KEY);
-  body.classList.add(POINTER_EVENT_NONE_KEY);
+  body.classList.add(POINTER_EVENT_NONE_CLASS);
 }
 
 function resetConfirm() {
   alertWindow.classList.add(INVISIBLE_KEY);
-  body.classList.remove(POINTER_EVENT_NONE_KEY);
+  body.classList.remove(POINTER_EVENT_NONE_CLASS);
   ctx.save();
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
@@ -147,7 +147,7 @@ function resetConfirm() {
 
 function resetCancel() {
   alertWindow.classList.add(INVISIBLE_KEY);
-  body.classList.remove(POINTER_EVENT_NONE_KEY);
+  body.classList.remove(POINTER_EVENT_NONE_CLASS);
 }
 // 캔버스 내용 초기화 끝
 
