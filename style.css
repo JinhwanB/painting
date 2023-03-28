@@ -7,7 +7,7 @@ body {
   background-color: blanchedalmond;
   gap: 20px;
   padding: 20px;
-  font-family: "맑은 고딕";
+  font-family: "Roboto Mono", monospace;
   user-select: none;
   cursor: url(https://cur.cursors-4u.net/symbols/sym-6/sym598.cur), auto !important;
 }
@@ -37,14 +37,20 @@ button:hover {
 }
 
 span {
+  color: #b08bbb;
   text-align: center;
   font-weight: 900;
   font-size: xx-large;
+  text-shadow: 3px 3px 4px #b08bbb;
 }
 
 label {
   font-weight: 900;
   color: #9575cd;
+}
+
+select {
+  cursor: url(https://cur.cursors-4u.net/symbols/sym-6/sym598.cur), auto !important;
 }
 
 #image:hover {
